@@ -1,0 +1,11 @@
+<!-- 질문 목록 -->
+{% if question_list %}
+    <ul>
+    {% for question in question_list %}
+        <!-- 유지보수가 수월하도록 하드코딩 대신, url_for() 함수 사용 -->
+        <li><a href="{{ url_for('question.detail', question_id=question.id) }}">{{ question.subject }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>질문이 없습니다.</p>
+{% endif %}

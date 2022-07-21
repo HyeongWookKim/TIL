@@ -1,4 +1,5 @@
-from flask import Blueprint
+from flask import Blueprint, url_for
+from werkzeug.utils import redirect
 
 
 # 블루프린트 생성
@@ -11,4 +12,6 @@ def hello_pybo():
 
 @bp.route('/')
 def index():
-    return 'Pybo index'
+    # redirect(URL): URL로 페이지를 이동
+    # url_for(라우팅 함수명): 라우팅 함수에 매핑되어 있는 URL을 리턴
+    return redirect(url_for('question._list'))
