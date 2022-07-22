@@ -1,11 +1,34 @@
-<!-- 질문 목록 -->
-{% if question_list %}
-    <ul>
-    {% for question in question_list %}
-        <!-- 유지보수가 수월하도록 하드코딩 대신, url_for() 함수 사용 -->
-        <li><a href="{{ url_for('question.detail', question_id=question.id) }}">{{ question.subject }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>질문이 없습니다.</p>
-{% endif %}
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-3">
+    <table class="table">
+        <thead>
+        <tr class="table-dark">
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성일시</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- 질문 목록 -->
+        {% if question_list %}
+        {% for question in question_list %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>
+                <!-- 유지보수가 수월하도록 하드코딩 대신, url_for() 함수 사용 -->
+                <a href="{{ url_for('question.detail', question_id=question.id) }}">{{ question.subject }}</a>
+            </td>
+            <td>{{ question.create_date }}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="3">질문이 없습니다.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('question.create') }}" class="btn btn-primary">질문 등록하기</a>
+</div>
+{% endblock %}
